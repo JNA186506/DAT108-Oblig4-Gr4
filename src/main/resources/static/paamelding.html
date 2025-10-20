@@ -2,6 +2,7 @@
 <html lang="no">
 <head>
 	<link href="css/simple.css" rel="stylesheet" type="text/css" />
+	<script src="js/deltagerscript.js" defer></script>
 <!-- <script src="js/myscript.js" defer></script>  -->  
 	<title>Påmelding</title>
 </head>
@@ -14,6 +15,35 @@
 		 siden dette er pensum. Her får dere sette opp skjemaet
 		 selv. Lykke til.
 	-->
+	<div id="root">
+		<fieldset>
+			<legend>Registrer deltager</legend>
+			<form action="/paameldt.html">
+				<label for="fornavn">Fornavn</label>
+				<input type="text" id="fornavn" name="fornavn"><br>
 
+				<label for="etternavn">Etternavn</label>
+				<input type="text" id="etternavn" name="etternavn"><br>
+
+				<label for="nummer">Mobilnummer</label>
+				<input type="number" id="nummer" name="nummer"><br>
+
+				<label for="passord1">Passord</label>
+				<input type="password" id="passord1" name="passord1"><br>
+
+				<label for="passord2">Repetert passord</label>
+				<input type="password" id="passord2" name="passord2"><br>
+
+				<p>Kjønn</p>
+				<label>
+					<input type="radio" name="kjonn" value="Mann"> Mann
+				</label>
+				<label>
+					<input type="radio" name="kjonn" value="Kvinne"> Kvinne
+				</label>
+				<input type="submit" id="submitBtn" value="Registrer!">
+			</form>
+		</fieldset>
+	</div>
 </body>
 </html>
