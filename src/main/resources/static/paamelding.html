@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="no-nb">
 <head>
 	<link href="css/simple.css" rel="stylesheet" type="text/css" />
-	<script src="js/deltagerscript.js" defer></script>
+	<script type="text/javascript" src="js/deltagerscript.js" defer></script>
+    <meta charset="UTF-8">
 <!-- <script src="js/myscript.js" defer></script>  -->  
 	<title>Påmelding</title>
 </head>
@@ -18,7 +19,7 @@
 	<div id="root">
 		<fieldset>
 			<legend>Registrer deltager</legend>
-			<form action="/paameldt.html">
+			<form action="/paamelding" method="post">
 				<label for="fornavn">Fornavn</label>
 				<input type="text" id="fornavn" name="fornavn"><br>
 
@@ -26,7 +27,7 @@
 				<input type="text" id="etternavn" name="etternavn"><br>
 
 				<label for="nummer">Mobilnummer</label>
-				<input type="number" id="nummer" name="nummer"><br>
+				<input type="tel" id="nummer" name="mobil"><br>
 
 				<label for="passord1">Passord</label>
 				<input type="password" id="passord1" name="passord1"><br>
@@ -36,7 +37,7 @@
 
 				<p>Kjønn</p>
 				<label>
-					<input type="radio" name="kjonn" value="Mann"> Mann
+					<input type="radio" name="kjonn" value="Mann" checked> Mann
 				</label>
 				<label>
 					<input type="radio" name="kjonn" value="Kvinne"> Kvinne

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="simple.css">
+    <link rel="stylesheet" href="css/simple.css">
     <title>Påmeldt</title>
 </head>
 
@@ -12,8 +12,8 @@
 <h2>Påmeldingsbekreftelse</h2>
 <p>Påmeldingen er mottatt for</p>
 <p>
-    ${deltager.fornavn} ${deltager.etternavn}<br />
-    ${deltager.nummer} <br />
+    ${deltager.fornavn}&nbsp;${deltager.etternavn}<br />
+    ${deltager.mobil} <br />
     ${deltager.kjonn} <br />
 </p>
 <a href="${pageContext.request.contextPath}/deltagerView">Gå til deltagerlisten</a>

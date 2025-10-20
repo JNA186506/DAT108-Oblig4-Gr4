@@ -6,13 +6,58 @@ const passord1Input = root.querySelector("#passord1");
 const passord2Input = root.querySelector("#passord2");
 const submitBtn = root.querySelector("#submitBtn");
 
-function validateInput() {
-    const regExpNavn = /^([a-zæøå]{2,}(\s+|-*))/gi;
+function validateNavn(input, fieldName) {
+    const nameRegex = /^[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*$/;
+    const value = input.value.trim();
 
-    const validFornavn = regExpNavn.test(fornavnInput.value.trim());
-    const validEtternavn = regExpNavn.test(etternavnInput.value.trim());
+    input.setCustomValidity("");
 
-    const validNummer = nummerInput.validity();
+    if (!value) {
+        input.setCustomValidity(`${fieldName} er påkrevd`);
+        input.reportValidity();
+        return false;
+    }
+
+    if (value.length < 2 || !nameRegex.test(value)) {
+        input.setCustomValidity("Navnet må inneholde minst to bokstaver. Kun bokstaver, mellomrom og bindestrek er tillatt");
+        input.reportValidity();
+        return false;
+    }
+
+    return true;
 }
 
-submitBtn.addEventListener("click", () => validateInput())
+function validatePhone(input) {
+    const digitsOnly = /\d/g;
+    const value = input.value.trim();
+
+    input.setCustomValidity("");
+
+    if (!value) {
+        input.setCustomValidity("Mobilnummer er påkrevd");
+        input.reportValidity();
+        return false;
+    }
+
+    const digits = (value.match(digitsOnly) || []).length;
+
+    if (digits !== 8) {
+        input.setCustomValidity("Mobilnummer må inneholde nøyaktig 8 siffer");
+        input.reportValidity();
+        return false;
+    }
+
+    return true;
+}
+
+function validateInput() {
+    return validateNavn(fornavnInput, "Fornavn") &&
+        validateNavn(etternavnInput, "Etternavn") &&
+        validatePhone(nummerInput);
+}
+
+submitBtn.addEventListener("click", (e) => {
+    if (!validateInput()) {
+        e.preventDefault();
+    }
+})

@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="simple.css">
+    <link rel="stylesheet" href="css/simple.css">
     <script src="deltagerscript.js" defer></script>
     <title>Deltagerliste</title>
 </head>
@@ -18,9 +18,9 @@
         </tr>
         <c:forEach var="deltager" items="${deltagere}">
             <tr>
-                <t>${deltager.kjonn}</t>
+                <td>${deltager.kjonn}</td>
                 <td>${deltager.fornavn} ${deltager.etternavn}</td>
-                <td>${deltager.stilling}</td>
+                <td>${deltager.mobil}</td>
             </tr>
         </c:forEach>
     </table>
