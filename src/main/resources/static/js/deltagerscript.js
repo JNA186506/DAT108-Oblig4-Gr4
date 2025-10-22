@@ -50,10 +50,53 @@ function validatePhone(input) {
     return true;
 }
 
+function validatePassword(input1, input2) {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!?]).{8,}$/;
+    const value1 = input1.value.trim();
+    const value2 = input2.value.trim();
+
+    console.log(value1.length);
+    input2.setCustomValidity("");
+
+    if (!value1 || !value2) {
+        input2.setCustomValidity("Begge passordfeltene må fylles ut");
+        input2.reportValidity();
+        return false;
+    }
+
+    if (value1.length < 8 || value2.length < 8) {
+        input2.setCustomValidity("Passordet må minst være 8 tegn");
+        input2.reportValidity();
+        return false;
+    }
+
+    if (!value1.match(passwordRegex)) {
+        input1.setCustomValidity("Passordet kan kun inneholde små eller store bokstaver, tall, spesialtegn");
+        input1.reportValidity();
+        return false;
+    }
+
+    if (!value2.match(passwordRegex)) {
+        input2.setCustomValidity("Passordet kan kun inneholde små eller store bokstaver, tall, spesialtegn")
+        input2.reportValidity();
+        return false;
+    }
+
+    if (value1 !== value2){
+        input2.setCustomValidity("Passordene må være like!");
+        input2.reportValidity();
+        return false;
+    }
+
+    return true;
+
+}
+
 function validateInput() {
     return validateNavn(fornavnInput, "Fornavn") &&
         validateNavn(etternavnInput, "Etternavn") &&
-        validatePhone(nummerInput);
+        validatePhone(nummerInput) &&
+        validatePassword(passord1Input, passord2Input);
 }
 
 submitBtn.addEventListener("click", (e) => {
