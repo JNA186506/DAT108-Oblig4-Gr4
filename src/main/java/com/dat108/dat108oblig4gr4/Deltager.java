@@ -10,27 +10,39 @@ public class Deltager {
     @NotNull(message="mobilnummer er påkrevd")
     private String mobil;
 
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\\\d)(?=.*[@#$%^&+=]).{8,}$",
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!?]).{8,}$",
     message = "Passord kan kun innehold små og store bokstaver, tall, må minst inneholde et spesialtegn og minst 8 tegn")
     private String passord;
 
     @Size(min = 2, message="Navn må inneholde minst to tegn")
-    @Pattern(regexp = "/[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*/")
+    @Pattern(regexp = "[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*")
+    @NotNull(message = "Navn er påkrevd")
     private String fornavn;
 
     @Size(min = 2, message="Navn må inneholde minst to tegn")
-    @Pattern(regexp = "/[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*/",
+    @Pattern(regexp = "[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*",
     message = "navn kan kun inneholde bokstaver, bindestrek og mellomrom")
     private String etternavn;
 
-    @Pattern(regexp = "(:?mann|kvinne)", flags  = Pattern.Flag.CASE_INSENSITIVE)
+    @Pattern(regexp = "(?i)^(mann|kvinne)$", flags  = Pattern.Flag.CASE_INSENSITIVE)
     private String kjonn;
 
+    public Deltager() {}
+
+    //Slett til neste oppgave
     public Deltager(String fornavn, String etternavn, String kjonn, String mobil) {
         this.fornavn = fornavn;
         this.etternavn = etternavn;
         this.kjonn = kjonn;
         this.mobil = mobil;
+    }
+
+    public Deltager(String fornavn, String etternavn, String kjonn, String mobil, String passord) {
+        this.fornavn = fornavn;
+        this.etternavn = etternavn;
+        this.kjonn = kjonn;
+        this.mobil = mobil;
+        this.passord = passord;
     }
 
     public String getMobil() {
@@ -71,5 +83,9 @@ public class Deltager {
 
     public void setKjonn(String kjonn) {
         this.kjonn = kjonn;
+    }
+
+    public int hashMobil(String mobil) {
+        return mobil.hashCode();
     }
 }

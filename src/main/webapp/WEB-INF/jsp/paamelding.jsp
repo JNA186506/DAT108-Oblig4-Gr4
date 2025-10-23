@@ -13,8 +13,9 @@
 
 <body>
 <h2>Påmelding</h2>
-<p style="color:red;">Påmeldingsdetaljer er ugyldige</p>
-
+<c:forEach var="error" items="${errors}">
+   <p style="color:red;">${error}</p>
+</c:forEach>
 <!-- Jeg har fjernet alt som har med form og input å gjøre,
      siden dette er pensum. Her får dere sette opp skjemaet
      selv. Lykke til.
@@ -33,7 +34,7 @@
             <input type="tel" id="nummer" name="mobil"><br>
 
             <label for="passord1">Passord</label>
-            <input type="password" id="passord1" name="passord1"><br>
+            <input type="password" id="passord1" name="passord"><br>
 
             <label for="passord2">Repetert passord</label>
             <input type="password" id="passord2" name="passord2"><br>
