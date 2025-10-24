@@ -43,6 +43,17 @@ public class DeltagerValideringTest {
         sjekkAtUgyldig("Navn er påkrevd");
     }
 
+    @Test
+    void harGyldigEtternavn() {
+        deltager.setEtternavn("J0hannes");
+        sjekkAtUgyldig("Navn kan kun inneholde bokstaver, bindestrek og mellomrom");
+    }
+
+    @Test
+    void harGyldigFornavn() {
+
+    }
+
     private void sjekkAtUgyldig(String feilmelding) {
         Set<ConstraintViolation<Deltager>> violations = validator.validate(deltager);
         assertFalse(violations.isEmpty());
