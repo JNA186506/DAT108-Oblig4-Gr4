@@ -15,13 +15,15 @@ public class Deltager {
     private String passord;
 
     @Size(min = 2, message="Navn må inneholde minst to tegn")
-    @Pattern(regexp = "[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*")
+    @Pattern(regexp = "[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*",
+    message = "navn kan kun inneholde bokstaver, bindestrek og mellomrom")
     @NotNull(message = "Navn er påkrevd")
     private String fornavn;
 
     @Size(min = 2, message="Navn må inneholde minst to tegn")
-    @Pattern(regexp = "[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*",
+    @Pattern(regexp = "[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*",
     message = "navn kan kun inneholde bokstaver, bindestrek og mellomrom")
+    @NotNull(message = "Navn er påkrevd")
     private String etternavn;
 
     @Pattern(regexp = "(?i)^(mann|kvinne)$", flags  = Pattern.Flag.CASE_INSENSITIVE)

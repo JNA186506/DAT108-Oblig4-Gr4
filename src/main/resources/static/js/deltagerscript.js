@@ -7,7 +7,7 @@ const passord2Input = root.querySelector("#passord2");
 const submitBtn = root.querySelector("#submitBtn");
 
 function validateNavn(input, fieldName) {
-    const nameRegex = /^[a-zæøåA-ZÆØÅ]+([ -][a-zæøåA-ZÆØÅ]+)*$/;
+    const nameRegex = /^[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*$/;
     const value = input.value.trim();
 
     input.setCustomValidity("");
