@@ -13,7 +13,8 @@
 
 <body>
 <h2>Påmelding</h2>
-<p>${mobilFinnes}</p>
+<p style="color:red;">${mobilFinnes}</p>
+<p style="color:red;">${passordErLikt}</p>
 <c:forEach var="error" items="${errors}">
    <p style="color:red;">${error}</p>
 </c:forEach>

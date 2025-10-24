@@ -62,8 +62,14 @@ public class DeltagerValideringTest {
 
     @Test
     void finnesMobil() {
-        deltager.setMobil("234 56 789");
+        deltager.setMobil("23456789");
         assertTrue(deltagerService.finnesMobil(deltager));
+    }
+
+    @Test
+    void duplikatPassord() {
+        String passord = "123Johannes!";
+        assertTrue(deltagerService.passordDuplikat(deltager, passord));
     }
 
     private void sjekkAtUgyldig(String feilmelding) {

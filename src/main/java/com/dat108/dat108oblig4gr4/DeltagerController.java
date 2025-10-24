@@ -38,15 +38,21 @@ public class DeltagerController {
     @PostMapping("/registrer")
     public String paamelding(RedirectAttributes ra, Model model,
                              @Valid @ModelAttribute("deltager") Deltager deltager,
-                             BindingResult bindingResult) {
+                             BindingResult bindingResult,
+                             String passord2) {
 
-        List<String> errorMessages = new ArrayList<>();
         boolean finnesMobil = deltagerService.finnesMobil(deltager);
+        boolean duplisertPassord = deltagerService.passordDuplikat(deltager, passord2);
 
         if (finnesMobil) {
             model.addAttribute("mobilFinnes", "Mobilnummer finnes allerede");
         }
 
+        if (duplisertPassord) {
+            model.addAttribute("passordErLikt", "Passord er ulike");
+        }
+
+        List<String> errorMessages = new ArrayList<>();
         if (bindingResult.hasErrors()) {
             List<ObjectError> errors = bindingResult.getAllErrors();
             errorMessages = errors.stream()
@@ -55,7 +61,7 @@ public class DeltagerController {
             model.addAttribute("errors", errorMessages);
         }
 
-        if (!errorMessages.isEmpty() || finnesMobil) {
+        if (!errorMessages.isEmpty() || finnesMobil || duplisertPassord) {
             return "paamelding";
         }
 

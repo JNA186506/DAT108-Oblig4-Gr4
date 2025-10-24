@@ -14,8 +14,13 @@ public class DeltagerService {
         //this.deltagerRepo = deltagerRepo;
     //}
 
+    public boolean passordDuplikat(Deltager deltager, String passord2) {
+        return !deltager.getPassord().equals(passord2);
+    }
+
     public boolean finnesMobil(Deltager deltager) {
         return deltagere.alleDeltagere().stream()
-                .anyMatch(d -> d.getMobil().equals(deltager.getMobil()));
+                .anyMatch(d -> d.getMobil().replaceAll("\\s+","")
+                        .equals(deltager.getMobil()));
     }
 }
