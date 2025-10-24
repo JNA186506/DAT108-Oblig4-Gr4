@@ -18,7 +18,14 @@
         </tr>
         <c:forEach var="deltager" items="${deltagere}">
             <tr>
-                <td>${deltager.kjonn}</td>
+				<c:choose>
+					<c:when test="${deltager.kjonn=='Mann'}">
+						<td>&#9794</td>
+					</c:when>
+					<c:when test="${deltager.kjonn=='Kvinne'}">
+						<td>&#9792</td>
+					</c:when>
+				</c:choose>
                 <td>${deltager.fornavn} &nbsp; ${deltager.etternavn}</td>
                 <td>${deltager.mobil}</td>
             </tr>
