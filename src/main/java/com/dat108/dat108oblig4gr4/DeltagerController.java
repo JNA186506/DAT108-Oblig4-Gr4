@@ -1,6 +1,7 @@
 package com.dat108.dat108oblig4gr4;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,12 @@ import static com.dat108.dat108oblig4gr4.Deltagere.deltagere;
 
 @Controller
 public class DeltagerController {
+
+    @Autowired private DeltagerService deltagerService;
+
+    public DeltagerController(DeltagerService deltagerService) {
+        this.deltagerService = deltagerService;
+    }
 
     @GetMapping("/paamelding")
     public String visPaamelding(Model model) {
@@ -55,6 +62,7 @@ public class DeltagerController {
 
     /* Dette er i utgangspunktet business-logikk og bør flyttes ut av
     controlleren. Er ikke helt sikker på hva som er den beste måten å gjøre det på.
+    En Service
      */
     private List<String> validator(Deltager deltager,
                                    BindingResult bindingResult) {
