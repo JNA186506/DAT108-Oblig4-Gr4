@@ -16,13 +16,13 @@ public class Deltager {
 
     @Size(min = 2, message="Navn må inneholde minst to tegn")
     @Pattern(regexp = "[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*",
-    message = "navn kan kun inneholde bokstaver, bindestrek og mellomrom")
+    message = "Navn kan kun inneholde bokstaver, bindestrek og mellomrom")
     @NotNull(message = "Navn er påkrevd")
     private String fornavn;
 
     @Size(min = 2, message="Navn må inneholde minst to tegn")
     @Pattern(regexp = "[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*",
-    message = "navn kan kun inneholde bokstaver, bindestrek og mellomrom")
+    message = "Navn kan kun inneholde bokstaver, bindestrek og mellomrom")
     @NotNull(message = "Navn er påkrevd")
     private String etternavn;
 
