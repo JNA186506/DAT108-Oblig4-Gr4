@@ -3,10 +3,10 @@ package com.dat108.dat108oblig4gr4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.dat108.dat108oblig4gr4.Deltagere.deltagere;
-
 @Service
 public class DeltagerService {
+    @Autowired
+    private Deltagere deltagere;
     //@Autowired
     //DeltagerRepo deltagerRepo;
 
@@ -15,7 +15,7 @@ public class DeltagerService {
     //}
 
     public boolean finnesMobil(Deltager deltager) {
-        return deltagere.stream()
+        return deltagere.alleDeltagere().stream()
                 .anyMatch(d -> d.getMobil().equals(deltager.getMobil()));
     }
 }

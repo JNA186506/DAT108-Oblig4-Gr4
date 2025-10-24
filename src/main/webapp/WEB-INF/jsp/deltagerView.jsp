@@ -19,7 +19,7 @@
         <c:forEach var="deltager" items="${deltagere}">
             <tr>
                 <td>${deltager.kjonn}</td>
-                <td>${deltager.fornavn} ${deltager.etternavn}</td>
+                <td>${deltager.fornavn} &nbsp; ${deltager.etternavn}</td>
                 <td>${deltager.mobil}</td>
             </tr>
         </c:forEach>

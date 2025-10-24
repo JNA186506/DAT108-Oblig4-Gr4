@@ -56,7 +56,8 @@ public class DeltagerValideringTest {
 
     @Test
     void harGyldigFornavn() {
-
+        deltager.setFornavn("J0hannes");
+        sjekkAtUgyldig("Navn kan kun inneholde bokstaver, bindestrek og mellomrom");
     }
 
     @Test

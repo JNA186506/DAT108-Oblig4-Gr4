@@ -17,12 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.dat108.dat108oblig4gr4.Deltagere.deltagere;
-
 @Controller
 public class DeltagerController {
 
-    @Autowired private DeltagerService deltagerService;
+    @Autowired
+    private DeltagerService deltagerService;
+    @Autowired
+    private Deltagere deltagere;
 
     public DeltagerController(DeltagerService deltagerService) {
         this.deltagerService = deltagerService;
@@ -58,6 +59,8 @@ public class DeltagerController {
             return "paamelding";
         }
 
+        deltagere.add(deltager);
+
         ra.addFlashAttribute("deltager", deltager);
         return "redirect:paameldt";
     }
@@ -69,7 +72,7 @@ public class DeltagerController {
 
     @GetMapping("/deltagerView")
     public String alleDeltagere(Model model) {
-        model.addAttribute("deltagere", deltagere);
+        model.addAttribute("deltagere", deltagere.alleDeltagere());
 
         return "deltagerView";
     }
