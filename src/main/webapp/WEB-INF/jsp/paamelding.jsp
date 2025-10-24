@@ -13,6 +13,7 @@
 
 <body>
 <h2>Påmelding</h2>
+<p>${mobilFinnes}</p>
 <c:forEach var="error" items="${errors}">
    <p style="color:red;">${error}</p>
 </c:forEach>

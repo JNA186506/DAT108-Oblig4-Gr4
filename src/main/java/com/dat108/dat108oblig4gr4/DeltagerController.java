@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,9 +39,22 @@ public class DeltagerController {
                              @Valid @ModelAttribute("deltager") Deltager deltager,
                              BindingResult bindingResult) {
 
+        List<String> errorMessages = new ArrayList<>();
+        boolean finnesMobil = deltagerService.finnesMobil(deltager);
+
+        if (finnesMobil) {
+            model.addAttribute("mobilFinnes", "Mobilnummer finnes allerede");
+        }
+
         if (bindingResult.hasErrors()) {
-            List<String> errors = validator(deltager, bindingResult);
-            model.addAttribute("errors", errors);
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            errorMessages = errors.stream()
+                            .map(ObjectError::getDefaultMessage)
+                            .collect(Collectors.toList());
+            model.addAttribute("errors", errorMessages);
+        }
+
+        if (!errorMessages.isEmpty() || finnesMobil) {
             return "paamelding";
         }
 
@@ -60,27 +74,5 @@ public class DeltagerController {
         return "deltagerView";
     }
 
-    /* Dette er i utgangspunktet business-logikk og bør flyttes ut av
-    controlleren. Er ikke helt sikker på hva som er den beste måten å gjøre det på.
-    En Service
-     */
-    private List<String> validator(Deltager deltager,
-                                   BindingResult bindingResult) {
 
-        boolean finnesMobil = deltagere.stream()
-                .anyMatch(d -> d.getMobil().equals(deltager.getMobil()));
-
-        List<String> errorMessages = null;
-        List<ObjectError> errors = bindingResult.getAllErrors();
-
-        errorMessages = errors.stream()
-                .map(ObjectError::getDefaultMessage)
-                .collect(Collectors.toList());
-
-        if (finnesMobil) {
-            errorMessages.add("Mobilnummer eksisterer allerede");
-        }
-
-        return errorMessages;
-    }
 }
