@@ -2,7 +2,6 @@ package com.dat108.dat108oblig4gr4;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.dat108.dat108oblig4gr4.DeltagerController;
 import org.springframework.stereotype.Service;
 
 @Service
