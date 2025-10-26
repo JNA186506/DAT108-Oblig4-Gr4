@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/simple.css">
+    <script type="text/javascript" src="/js/deltagerscript.js" defer></script>
     <title>Påmeldt</title>
 </head>
 

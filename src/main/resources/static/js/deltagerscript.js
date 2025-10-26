@@ -6,8 +6,6 @@ const passord1Input = root.querySelector("#passord1");
 const passord2Input = root.querySelector("#passord2");
 const submitBtn = root.querySelector("#submitBtn");
 
-passord1Input.addEventListener("input", () => validatePassword(passord1Input, passord2Input));
-passord2Input.addEventListener("input", () => validatePassword(passord1Input, passord2Input));
 
 function validateNavn(input, fieldName) {
     const nameRegex = /^[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*$/;
@@ -60,9 +58,6 @@ function validatePassword(input1, input2) {
 
     input1.setCustomValidity("");
     input2.setCustomValidity("");
-
-    console.log(value1.match(passwordRegex));
-    console.log(value2.match(passwordRegex));
 
     if (!value1 || !value2) {
         input2.setCustomValidity("Begge passordfeltene må fylles ut");

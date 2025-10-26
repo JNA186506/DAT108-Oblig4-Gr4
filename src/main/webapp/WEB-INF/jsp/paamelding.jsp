@@ -5,7 +5,7 @@
 <html lang="no-nb">
 <head>
     <link href="css/simple.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="js/deltagerscript.js" defer></script>
+    <script type="text/javascript" src="/js/deltagerscript.js" defer></script>
     <meta charset="UTF-8">
     <!-- <script src="js/myscript.js" defer></script>  -->
     <title>Påmelding</title>

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/simple.css">
-    <script src="deltagerscript.js" defer></script>
+    <script src="/js/deltagerscript.js" defer></script>
     <title>Deltagerliste</title>
 </head>
 <body>
