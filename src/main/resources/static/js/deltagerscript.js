@@ -6,6 +6,9 @@ const passord1Input = root.querySelector("#passord1");
 const passord2Input = root.querySelector("#passord2");
 const submitBtn = root.querySelector("#submitBtn");
 
+passord1Input.addEventListener("input", () => validatePassword(passord1Input, passord2Input));
+passord2Input.addEventListener("input", () => validatePassword(passord1Input, passord2Input));
+
 function validateNavn(input, fieldName) {
     const nameRegex = /^[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*$/;
     const value = input.value.trim();
@@ -55,50 +58,47 @@ function validatePassword(input1, input2) {
     const value1 = input1.value.trim();
     const value2 = input2.value.trim();
 
-    console.log(value1.length);
+    input1.setCustomValidity("");
     input2.setCustomValidity("");
+
+    console.log(value1.match(passwordRegex));
+    console.log(value2.match(passwordRegex));
 
     if (!value1 || !value2) {
         input2.setCustomValidity("Begge passordfeltene må fylles ut");
         input2.reportValidity();
         return false;
-    }
-
-    if (value1.length < 8 || value2.length < 8) {
+    } else if (value1.length < 8 || value2.length < 8) {
         input2.setCustomValidity("Passordet må minst være 8 tegn");
         input2.reportValidity();
         return false;
-    }
-
-    if (!value1.match(passwordRegex)) {
+    } else if (!value1.match(passwordRegex)) {
         input1.setCustomValidity("Passordet kan kun inneholde små eller store bokstaver, tall, spesialtegn");
         input1.reportValidity();
         return false;
-    }
-
-    if (!value2.match(passwordRegex)) {
+    } else if (!value2.match(passwordRegex)) {
         input2.setCustomValidity("Passordet kan kun inneholde små eller store bokstaver, tall, spesialtegn")
         input2.reportValidity();
         return false;
-    }
-
-    if (value1 !== value2){
+    } else if (value1 !== value2){
         input2.setCustomValidity("Passordene må være like!");
         input2.reportValidity();
         return false;
     }
 
+    input1.reportValidity();
+    input2.reportValidity();
     return true;
-
 }
 
 function validateInput() {
-    return validateNavn(fornavnInput, "Fornavn") &&
-        validateNavn(etternavnInput, "Etternavn") &&
-        validatePhone(nummerInput) &&
-        validatePassword(passord1Input, passord2Input);
-}
+    const fornavn = validateNavn(fornavnInput);
+    const etternavn = validateNavn(etternavnInput, "Fornavn");
+    const mobilnunner = validatePhone(nummerInput, "Etternavn");
+    const passord = validatePassword(passord1Input, passord2Input);
 
+    return passord && fornavn && etternavn && mobilnunner;
+}
 submitBtn.addEventListener("click", (e) => {
     if (!validateInput()) {
         e.preventDefault();
