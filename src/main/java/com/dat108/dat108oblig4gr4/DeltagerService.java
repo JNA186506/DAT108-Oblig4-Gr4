@@ -7,12 +7,16 @@ import org.springframework.stereotype.Service;
 public class DeltagerService {
     @Autowired
     private Deltagere deltagere;
-    //@Autowired
-    //DeltagerRepo deltagerRepo;
 
-    // public DeltagerService(DeltagerRepo deltagerRepo) {
-        //this.deltagerRepo = deltagerRepo;
-    //}
+    /* klargjort til del 2
+    @Autowired
+    DeltagerRepo deltagerRepo;
+
+    public DeltagerService(DeltagerRepo deltagerRepo) {
+        this.deltagerRepo = deltagerRepo;
+    }
+    */
+
 
     public boolean passordDuplikat(Deltager deltager, String passord2) {
         return !deltager.getPassord().equals(passord2);

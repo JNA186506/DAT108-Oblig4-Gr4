@@ -31,7 +31,7 @@ public class Deltager {
 
     public Deltager() {}
 
-    //Slett til neste oppgave
+    /* Slett til neste oppgave */
     public Deltager(String fornavn, String etternavn, String kjonn, String mobil) {
         this.fornavn = fornavn;
         this.etternavn = etternavn;
