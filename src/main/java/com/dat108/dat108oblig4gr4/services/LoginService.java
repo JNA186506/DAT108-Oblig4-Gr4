@@ -1,5 +1,6 @@
 package com.dat108.dat108oblig4gr4.services;
 
+import com.dat108.dat108oblig4gr4.classes.Deltager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,15 @@ public class LoginService {
     }
 
     public void loggInnBruker(HttpServletRequest request,
-                              String username, String password) {
+                              Deltager deltager) {
         loggUtBruker(request.getSession());
 
         HttpSession session = request.getSession();
-        session.setAttribute("username", username);
-        session.setAttribute("password", password);
+        session.setAttribute("deltager", deltager);
+        session.setMaxInactiveInterval(120);
+    }
+
+    public boolean erBrukerInnlogget(HttpSession session) {
+        return session != null && session.getAttribute("username") != null;
     }
 }

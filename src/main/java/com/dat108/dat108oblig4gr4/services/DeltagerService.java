@@ -22,6 +22,10 @@ public class DeltagerService {
         this.passordService = passordService;
     }
 
+    public Deltager finnDeltagerMedId(String mobil) {
+        return deltagerRepo.findById(mobil).orElse(null);
+    }
+
     public List<Deltager> finnAlleDeltagere() { return deltagerRepo.findAll(); }
 
     public void leggTilDeltager(Deltager deltager) {
@@ -36,8 +40,8 @@ public class DeltagerService {
 
         String salt = passordService.genererTilfeldigSalt();
         String hash = passordService.hashMedSalt(passordKlarTekst, salt);
-
         Passord hashetPassord = new Passord(hash, salt);
+
         deltager.setPassord(hashetPassord);
     }
 }

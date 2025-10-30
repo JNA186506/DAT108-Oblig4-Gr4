@@ -2,18 +2,17 @@ package com.dat108.dat108oblig4gr4.controllers;
 
 import com.dat108.dat108oblig4gr4.classes.Deltager;
 import com.dat108.dat108oblig4gr4.services.DeltagerService;
+import com.dat108.dat108oblig4gr4.services.LoginService;
 import com.dat108.dat108oblig4gr4.services.PassordService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -24,13 +23,14 @@ import java.util.stream.Collectors;
 @Controller
 public class DeltagerController {
 
-    @Autowired
-    private DeltagerService deltagerService;
-    @Autowired
-    private PassordService passordService;
+    private final DeltagerService deltagerService;
+    private final LoginService loginService;
 
-    public DeltagerController(DeltagerService deltagerService) {
+    @Autowired
+    public DeltagerController(DeltagerService deltagerService,
+                              LoginService loginService) {
         this.deltagerService = deltagerService;
+        this.loginService = loginService;
     }
 
     @GetMapping("/paamelding")
@@ -79,11 +79,10 @@ public class DeltagerController {
     }
 
     @GetMapping("/deltagerView")
-    public String alleDeltagere(Model model) {
+    public String alleDeltagere(Model model, HttpSession session) {
+        loginService.erBrukerInnlogget(session);
         model.addAttribute("deltagere", deltagerService.finnAlleDeltagere());
 
         return "deltagerView";
     }
-
-
 }

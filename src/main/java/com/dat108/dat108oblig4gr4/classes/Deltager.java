@@ -20,10 +20,6 @@ public class Deltager {
     @Embedded
     private Passord passord;
 
-    /* @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!?]).{8,}$",
-    message = "Passord kan kun innehold små og store bokstaver, tall, må minst inneholde et spesialtegn og minst 8 tegn")
-    private String passord; */
-
     @Size(min = 2, message="Navn må inneholde minst to tegn")
     @Pattern(regexp = "[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*",
     message = "Navn kan kun inneholde bokstaver, bindestrek og mellomrom")

@@ -11,14 +11,21 @@
 <body>
 <fieldset>
     <legend>Login</legend>
-    <label for="username"></label>
-    <input id="username" name="username" type="text">
+    <p style="color:red;">${feilNavn}</p>
+    <p style="color:red;">${feilPassord}</p>
 
-    <label for="password"></label>
-    <input id="password" name="password" type="password">
+    <form action="${pageContext.request.contextPath}/login" method="post">
+        <label for="username"></label>
+        <p>Mobil</p>
+        <input id="username" name="username" type="text">
 
-    <label for="loginBtn"></label>
-    <input id="loginBtn" type="submit" value="Login">
+        <label for="password"></label>
+        <p>Passord</p>
+        <input id="password" name="passord" type="password">
+
+        <label for="loginBtn"></label>
+        <input id="loginBtn" type="submit" value="Login">
+    </form>
 </fieldset>
 </body>
 </html>
