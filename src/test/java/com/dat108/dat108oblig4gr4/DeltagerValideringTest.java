@@ -1,5 +1,7 @@
 package com.dat108.dat108oblig4gr4;
 
+import com.dat108.dat108oblig4gr4.classes.Deltager;
+import com.dat108.dat108oblig4gr4.services.DeltagerService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

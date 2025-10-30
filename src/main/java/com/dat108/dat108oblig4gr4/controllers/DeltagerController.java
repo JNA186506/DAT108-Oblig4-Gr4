@@ -1,5 +1,8 @@
-package com.dat108.dat108oblig4gr4;
+package com.dat108.dat108oblig4gr4.controllers;
 
+import com.dat108.dat108oblig4gr4.classes.Deltager;
+import com.dat108.dat108oblig4gr4.services.DeltagerService;
+import com.dat108.dat108oblig4gr4.services.PassordService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -23,7 +27,7 @@ public class DeltagerController {
     @Autowired
     private DeltagerService deltagerService;
     @Autowired
-    private Deltagere deltagere;
+    private PassordService passordService;
 
     public DeltagerController(DeltagerService deltagerService) {
         this.deltagerService = deltagerService;
@@ -36,20 +40,17 @@ public class DeltagerController {
     }
 
     @PostMapping("/registrer")
-    public String paamelding(RedirectAttributes ra, Model model,
+    public String paamelding(RedirectAttributes ra,
+                             @RequestParam String passordKlarTekst,
                              @Valid @ModelAttribute("deltager") Deltager deltager,
-                             BindingResult bindingResult,
-                             String passord2) {
+                             BindingResult bindingResult) {
 
         boolean finnesMobil = deltagerService.finnesMobil(deltager);
-        boolean duplisertPassord = deltagerService.passordDuplikat(deltager, passord2);
+
+        deltagerService.finnesMobil(deltager);
 
         if (finnesMobil) {
-            model.addAttribute("mobilFinnes", "Mobilnummer finnes allerede");
-        }
-
-        if (duplisertPassord) {
-            model.addAttribute("passordErLikt", "Passord er ulike");
+            ra.addFlashAttribute("mobilFinnes", "Mobilnummer finnes allerede");
         }
 
         List<String> errorMessages = new ArrayList<>();
@@ -58,14 +59,15 @@ public class DeltagerController {
             errorMessages = errors.stream()
                             .map(ObjectError::getDefaultMessage)
                             .collect(Collectors.toList());
-            model.addAttribute("errors", errorMessages);
+            ra.addFlashAttribute("errors", errorMessages);
         }
 
-        if (!errorMessages.isEmpty() || finnesMobil || duplisertPassord) {
-            return "paamelding";
+        if (!errorMessages.isEmpty() || finnesMobil) {
+            return "redirect:paamelding";
         }
 
-        deltagere.add(deltager);
+        deltagerService.generatePassord(deltager, passordKlarTekst);
+        deltagerService.leggTilDeltager(deltager);
 
         ra.addFlashAttribute("deltager", deltager);
         return "redirect:paameldt";
@@ -78,7 +80,7 @@ public class DeltagerController {
 
     @GetMapping("/deltagerView")
     public String alleDeltagere(Model model) {
-        model.addAttribute("deltagere", deltagere.alleDeltagere());
+        model.addAttribute("deltagere", deltagerService.finnAlleDeltagere());
 
         return "deltagerView";
     }

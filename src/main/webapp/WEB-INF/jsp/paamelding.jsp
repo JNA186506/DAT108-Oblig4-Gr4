@@ -36,7 +36,7 @@
             <input type="tel" id="nummer" name="mobil"><br>
 
             <label for="passord1">Passord</label>
-            <input type="password" id="passord1" name="passord"><br>
+            <input type="password" id="passord1" name="passordKlarTekst"><br>
 
             <label for="passord2">Repetert passord</label>
             <input type="password" id="passord2" name="passord2"><br>

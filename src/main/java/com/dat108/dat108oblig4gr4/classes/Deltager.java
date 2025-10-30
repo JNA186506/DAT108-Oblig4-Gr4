@@ -1,18 +1,28 @@
-package com.dat108.dat108oblig4gr4;
+package com.dat108.dat108oblig4gr4.classes;
 
-
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(schema = "deltager_schema", name = "deltager")
 public class Deltager {
+
+    @Id
     @Pattern(regexp = "^\\d{8}$", message = "mobilnummer må være 8 siffer")
     @NotNull(message="mobilnummer er påkrevd")
     private String mobil;
 
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!?]).{8,}$",
+    @Embedded
+    private Passord passord;
+
+    /* @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!?]).{8,}$",
     message = "Passord kan kun innehold små og store bokstaver, tall, må minst inneholde et spesialtegn og minst 8 tegn")
-    private String passord;
+    private String passord; */
 
     @Size(min = 2, message="Navn må inneholde minst to tegn")
     @Pattern(regexp = "[A-ZÆØÅ]{1}[a-zæøå]+([ -][A-ZÆØÅ]{1}[a-zæøå]+)*",
@@ -31,20 +41,11 @@ public class Deltager {
 
     public Deltager() {}
 
-    /* Slett til neste oppgave */
     public Deltager(String fornavn, String etternavn, String kjonn, String mobil) {
         this.fornavn = fornavn;
         this.etternavn = etternavn;
         this.kjonn = kjonn;
         this.mobil = mobil;
-    }
-
-    public Deltager(String fornavn, String etternavn, String kjonn, String mobil, String passord) {
-        this.fornavn = fornavn;
-        this.etternavn = etternavn;
-        this.kjonn = kjonn;
-        this.mobil = mobil;
-        this.passord = passord;
     }
 
     public String getMobil() {
@@ -55,11 +56,11 @@ public class Deltager {
         this.mobil = mobil;
     }
 
-    public String getPassord() {
+    public Passord getPassord() {
         return passord;
     }
 
-    public void setPassord(String passord) {
+    public void setPassord(Passord passord) {
         this.passord = passord;
     }
 
@@ -87,7 +88,4 @@ public class Deltager {
         this.kjonn = kjonn;
     }
 
-    public int hashMobil(String mobil) {
-        return mobil.hashCode();
-    }
 }
