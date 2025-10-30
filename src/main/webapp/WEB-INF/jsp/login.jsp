@@ -13,6 +13,7 @@
     <legend>Login</legend>
     <p style="color:red;">${feilNavn}</p>
     <p style="color:red;">${feilPassord}</p>
+    <p style="color:red;">${ikkeLoggetInn}</p>
 
     <form action="${pageContext.request.contextPath}/login" method="post">
         <label for="username"></label>

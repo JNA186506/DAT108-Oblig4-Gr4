@@ -79,8 +79,12 @@ public class DeltagerController {
     }
 
     @GetMapping("/deltagerView")
-    public String alleDeltagere(Model model, HttpSession session) {
-        loginService.erBrukerInnlogget(session);
+    public String alleDeltagere(Model model, HttpSession session, RedirectAttributes ra) {
+
+        if (!loginService.erBrukerInnlogget(session)) {
+            ra.addFlashAttribute("ikkeLoggetInn", "Du er ikke logget inn");
+            return "redirect:login";
+        }
         model.addAttribute("deltagere", deltagerService.finnAlleDeltagere());
 
         return "deltagerView";
