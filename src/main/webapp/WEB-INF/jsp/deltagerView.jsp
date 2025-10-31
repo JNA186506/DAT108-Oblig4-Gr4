@@ -16,7 +16,8 @@
             <td>Mobil</td>
         </tr>
         <c:forEach var="deltager" items="${deltagere}">
-            <tr>
+            <tr <c:if test="${innlogget.mobil == deltager.mobil}">style="background-color: lightgreen;"</c:if>>
+
 				<c:choose>
 					<c:when test="${deltager.kjonn=='Mann'}">
 						<td>&#9794;</td>

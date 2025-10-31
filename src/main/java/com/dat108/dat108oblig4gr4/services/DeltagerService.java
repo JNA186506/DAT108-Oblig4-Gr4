@@ -6,6 +6,7 @@ import com.dat108.dat108oblig4gr4.classes.Passord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -27,6 +28,12 @@ public class DeltagerService {
     }
 
     public List<Deltager> finnAlleDeltagere() { return deltagerRepo.findAll(); }
+
+    public List<Deltager> finnAlleDeltagereSortert() {
+        List<Deltager> deltagere = deltagerRepo.findAll();
+        return deltagere.stream().sorted(Comparator.comparing(Deltager::getFornavn)
+                .thenComparing(Deltager::getEtternavn)).toList();
+    }
 
     public void leggTilDeltager(Deltager deltager) {
         deltagerRepo.save(deltager);

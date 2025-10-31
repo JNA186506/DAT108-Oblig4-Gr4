@@ -88,7 +88,10 @@ public class DeltagerController {
             ra.addFlashAttribute("ikkeLoggetInn", "Du er ikke logget inn");
             return "redirect:login";
         }
-        model.addAttribute("deltagere", deltagerService.finnAlleDeltagere());
+
+        model.addAttribute("deltagere", deltagerService.finnAlleDeltagereSortert());
+        System.out.println(session.getAttribute("mobil"));
+        model.addAttribute("innlogget", session.getAttribute("deltager"));
 
         return "deltagerView";
     }
