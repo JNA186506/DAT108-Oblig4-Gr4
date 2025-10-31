@@ -18,7 +18,7 @@
     <form action="${pageContext.request.contextPath}/login" method="post">
         <label for="username"></label>
         <p>Mobil</p>
-        <input id="username" name="username" type="text">
+        <input id="username" name="username" type="text" value="${param.username}">
 
         <label for="password"></label>
         <p>Passord</p>

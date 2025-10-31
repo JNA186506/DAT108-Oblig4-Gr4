@@ -3,7 +3,6 @@ package com.dat108.dat108oblig4gr4.controllers;
 import com.dat108.dat108oblig4gr4.classes.Deltager;
 import com.dat108.dat108oblig4gr4.services.DeltagerService;
 import com.dat108.dat108oblig4gr4.services.LoginService;
-import com.dat108.dat108oblig4gr4.services.PassordService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,14 +73,18 @@ public class DeltagerController {
     }
 
     @GetMapping("/paameldt")
-    public String paameldt() {
+    public String paameldt(HttpSession session, RedirectAttributes ra) {
+        if (loginService.erBrukerInnlogget(session)) {
+            ra.addFlashAttribute("ikkeLoggetInn", "Du er ikke logget inn");
+            return "redirect:login";
+        }
         return "paameldt";
     }
 
     @GetMapping("/deltagerView")
     public String alleDeltagere(Model model, HttpSession session, RedirectAttributes ra) {
 
-        if (!loginService.erBrukerInnlogget(session)) {
+        if (loginService.erBrukerInnlogget(session)) {
             ra.addFlashAttribute("ikkeLoggetInn", "Du er ikke logget inn");
             return "redirect:login";
         }

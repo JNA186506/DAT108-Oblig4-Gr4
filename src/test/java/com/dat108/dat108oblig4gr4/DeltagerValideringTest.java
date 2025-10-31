@@ -1,7 +1,9 @@
 package com.dat108.dat108oblig4gr4;
 
 import com.dat108.dat108oblig4gr4.classes.Deltager;
+import com.dat108.dat108oblig4gr4.classes.Passord;
 import com.dat108.dat108oblig4gr4.services.DeltagerService;
+import com.dat108.dat108oblig4gr4.services.PassordService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -25,6 +27,9 @@ public class DeltagerValideringTest {
     @Autowired
     private DeltagerService deltagerService;
 
+    @Autowired
+    private PassordService passordService;
+
     @BeforeEach
     void setUp() {
         validator = Validation.buildDefaultValidatorFactory().getValidator();
@@ -34,7 +39,12 @@ public class DeltagerValideringTest {
         deltager.setEtternavn("Antonsen");
         deltager.setMobil("46860501");
         deltager.setKjonn("Mann");
-        deltager.setPassord("Johannes123!");
+
+        String passord = "Johannes123!";
+        String salt = passordService.genererTilfeldigSalt();
+        String hashedPassord = passordService.hashMedSalt(passord, salt);
+        Passord pass = new Passord(hashedPassord, salt);
+        deltager.setPassord(pass);
     }
 
     @Test
@@ -69,9 +79,13 @@ public class DeltagerValideringTest {
     }
 
     @Test
-    void duplikatPassord() {
-        String passord = "123Johannes!";
-        assertTrue(deltagerService.passordDuplikat(deltager, passord));
+    void riktigPassord() {
+        String forsok1 = "J0hannes123!";
+        Passord riktigPass = deltager.getPassord();
+        assertFalse(passordService.erKorrektPassord(forsok1, riktigPass.getSalt(), riktigPass.getHash()));
+
+        String forsok2 = "Johannes123!";
+        assertTrue(passordService.erKorrektPassord(forsok2, riktigPass.getSalt(), riktigPass.getHash()));
     }
 
     private void sjekkAtUgyldig(String feilmelding) {

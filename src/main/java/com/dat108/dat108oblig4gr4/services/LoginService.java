@@ -24,6 +24,6 @@ public class LoginService {
     }
 
     public boolean erBrukerInnlogget(HttpSession session) {
-        return session != null && session.getAttribute("deltager") != null;
+        return session == null || session.getAttribute("deltager") == null;
     }
 }
