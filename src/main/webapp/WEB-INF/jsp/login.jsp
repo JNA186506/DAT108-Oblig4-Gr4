@@ -14,6 +14,7 @@
     <p style="color:red;">${feilNavn}</p>
     <p style="color:red;">${feilPassord}</p>
     <p style="color:red;">${ikkeLoggetInn}</p>
+    <p style="color:red;">${loggetUt}</p>
 
     <form action="${pageContext.request.contextPath}/login" method="post">
         <label for="username"></label>
@@ -26,6 +27,10 @@
 
         <label for="loginBtn"></label>
         <input id="loginBtn" type="submit" value="Login">
+
+    </form>
+    <form action="paamelding">
+        <input type="submit" value="Reigstrer deltager">
     </form>
 </fieldset>
 </body>

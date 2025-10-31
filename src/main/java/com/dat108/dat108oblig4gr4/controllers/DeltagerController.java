@@ -3,6 +3,7 @@ package com.dat108.dat108oblig4gr4.controllers;
 import com.dat108.dat108oblig4gr4.classes.Deltager;
 import com.dat108.dat108oblig4gr4.services.DeltagerService;
 import com.dat108.dat108oblig4gr4.services.LoginService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,8 @@ public class DeltagerController {
     public String paamelding(RedirectAttributes ra,
                              @RequestParam String passordKlarTekst,
                              @Valid @ModelAttribute("deltager") Deltager deltager,
-                             BindingResult bindingResult) {
+                             BindingResult bindingResult,
+                             HttpServletRequest request) {
 
         boolean finnesMobil = deltagerService.finnesMobil(deltager);
 
@@ -68,16 +70,14 @@ public class DeltagerController {
         deltagerService.generatePassord(deltager, passordKlarTekst);
         deltagerService.leggTilDeltager(deltager);
 
+        loginService.loggInnBruker(request, deltager);
+
         ra.addFlashAttribute("deltager", deltager);
         return "redirect:paameldt";
     }
 
     @GetMapping("/paameldt")
     public String paameldt(HttpSession session, RedirectAttributes ra) {
-        if (loginService.erBrukerInnlogget(session)) {
-            ra.addFlashAttribute("ikkeLoggetInn", "Du er ikke logget inn");
-            return "redirect:login";
-        }
         return "paameldt";
     }
 

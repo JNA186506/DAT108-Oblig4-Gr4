@@ -30,4 +30,8 @@
             </tr>
         </c:forEach>
     </table>
+<form action="${pageContext.request.contextPath}/logout" method="post">
+    <label for="logoutBtn"></label>
+    <input type="submit" id="logoutBtn" value="logout">
+</form>
 </body>

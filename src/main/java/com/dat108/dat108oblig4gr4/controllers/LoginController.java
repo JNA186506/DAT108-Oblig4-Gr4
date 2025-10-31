@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping({"/","/login"})
 public class LoginController {
 
     private final PassordService passordService;
