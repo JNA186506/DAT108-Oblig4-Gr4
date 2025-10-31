@@ -1,4 +1,5 @@
 const root = document.getElementById("root");
+const form = root.querySelector("form");
 const fornavnInput = root.querySelector("#fornavn");
 const etternavnInput = root.querySelector("#etternavn");
 const nummerInput = root.querySelector("#nummer");
@@ -94,8 +95,19 @@ function validateInput() {
 
     return passord && fornavn && etternavn && mobilnunner;
 }
+
+form.addEventListener('submit', e => {
+    form.querySelectorAll('input[type="text"], textarea').forEach(input => {
+    input.value = input.value.trim();
+    });
+});
+
 submitBtn.addEventListener("click", (e) => {
+    form.querySelectorAll('input[type="text"], textarea').forEach(input => {
+        input.value = input.value.trim();
+    });
+
     if (!validateInput()) {
         e.preventDefault();
     }
-})
+});

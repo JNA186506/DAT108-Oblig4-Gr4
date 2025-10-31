@@ -18,10 +18,6 @@
 <c:forEach var="error" items="${errors}">
    <p style="color:red;">${error}</p>
 </c:forEach>
-<!-- Jeg har fjernet alt som har med form og input å gjøre,
-     siden dette er pensum. Her får dere sette opp skjemaet
-     selv. Lykke til.
--->
 <div id="root">
     <fieldset>
         <legend>Registrer deltager</legend>
