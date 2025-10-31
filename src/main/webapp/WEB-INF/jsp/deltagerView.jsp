@@ -9,6 +9,7 @@
 </head>
 <body>
 <h3>Deltagerliste</h3>
+<p>Du er innlogget som <b><i>${innlogget.fornavn}&nbsp;${innlogget.etternavn}</i></b></p>
     <table>
         <tr>
             <td>Kjonn</td>

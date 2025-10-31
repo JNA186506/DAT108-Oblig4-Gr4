@@ -27,11 +27,13 @@
 
         <label for="loginBtn"></label>
         <input id="loginBtn" type="submit" value="Login">
+        <a href="/paamelding">
+            <button type="button">
+                Registrer deltager
+            </button>
+        </a>
+    </form>
 
-    </form>
-    <form action="paamelding">
-        <input type="submit" value="Reigstrer deltager">
-    </form>
 </fieldset>
 </body>
 </html>

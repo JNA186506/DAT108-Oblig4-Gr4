@@ -89,9 +89,9 @@ public class DeltagerController {
             return "redirect:login";
         }
 
-        model.addAttribute("deltagere", deltagerService.finnAlleDeltagereSortert());
-        System.out.println(session.getAttribute("mobil"));
         model.addAttribute("innlogget", session.getAttribute("deltager"));
+
+        model.addAttribute("deltagere", deltagerService.finnAlleDeltagereSortert());
 
         return "deltagerView";
     }
