@@ -2,33 +2,44 @@ package com.dat108.dat108oblig4gr4;
 
 import com.dat108.dat108oblig4gr4.classes.Deltager;
 import com.dat108.dat108oblig4gr4.classes.Passord;
+import com.dat108.dat108oblig4gr4.interfaces.DeltagerRepo;
 import com.dat108.dat108oblig4gr4.services.DeltagerService;
 import com.dat108.dat108oblig4gr4.services.PassordService;
+import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class DeltagerValideringTest {
 
     private Validator validator;
 
     private Deltager deltager;
 
-    @Autowired
-    private DeltagerService deltagerService;
+    @InjectMocks
+    DeltagerService deltagerService;
 
-    @Autowired
-    private PassordService passordService;
+    @InjectMocks
+    PassordService passordService;
+
+    @Mock
+    DeltagerRepo deltagerRepo;
 
     @BeforeEach
     void setUp() {
@@ -45,6 +56,7 @@ public class DeltagerValideringTest {
         String hashedPassord = passordService.hashMedSalt(passord, salt);
         Passord pass = new Passord(hashedPassord, salt);
         deltager.setPassord(pass);
+
     }
 
     @Test
@@ -75,6 +87,9 @@ public class DeltagerValideringTest {
     @Test
     void finnesMobil() {
         deltager.setMobil("23456789");
+
+        when(deltagerRepo.existsById("23456789")).thenReturn(true);
+
         assertTrue(deltagerService.finnesMobil(deltager));
     }
 

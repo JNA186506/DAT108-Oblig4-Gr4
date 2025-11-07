@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
 
-    public void loggUtBruker(HttpSession session) {
+    public void loggUtBruker(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
@@ -16,14 +17,16 @@ public class LoginService {
 
     public void loggInnBruker(HttpServletRequest request,
                               Deltager deltager) {
-        loggUtBruker(request.getSession());
+        loggUtBruker(request);
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(true);
         session.setAttribute("deltager", deltager);
         session.setMaxInactiveInterval(120);
     }
 
-    public boolean erBrukerInnlogget(HttpSession session) {
-        return session == null || session.getAttribute("deltager") == null;
+    public boolean erBrukerInnlogget(HttpServletRequest request) {
+
+        HttpSession session = request.getSession( false);
+        return (session != null) && (session.getAttribute("deltager") != null);
     }
 }
